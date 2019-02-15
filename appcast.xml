@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Library Audit</title>
+		<link>http://sparkle-project.org/files/sparkletestcast.xml</link>
+		<description>Export Symbol and Shared Style data from any Library to CSV.</description>
+		<language>en</language>
+		<item>
+			<title>Version 0.1.2</title>
+			<description>
+				
+			</description>
+			<enclosure url="https://github.com/naughtandcross/sketch-library-audit/archive/master.zip" sparkle:version="0.1.2" />
+		</item>
+	</channel>
+</rss>
