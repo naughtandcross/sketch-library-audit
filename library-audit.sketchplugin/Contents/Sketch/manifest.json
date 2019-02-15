@@ -1,0 +1,28 @@
+{
+  "name": "Library Audit",
+  "description": "Export Symbol and Shared Style data from any Library to CSV.",
+  "author": "Colby Grenier",
+  "identifier": "com.naughtandcross.library-audit",
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "version": "0.1.2",
+  "icon": "icon.png",
+  "appcast": "https://raw.githubusercontent.com/naughtandcross/sketch-library-audit/master/appcast.xml",
+  "commands": [
+    {
+      "name": "📓 Library Audit",
+      "identifier": "audit-identifier",
+      "script": "audit.js",
+      "shortcut": "cmd option l",
+      "handler": "runAudit"
+    }
+  ],
+  "menu": {
+    "title": "library-audit",
+    "isRoot": true,
+    "items": [
+      "audit-identifier"
+    ]
+  },
+  "disableCocoaScriptPreprocessor": true
+}
