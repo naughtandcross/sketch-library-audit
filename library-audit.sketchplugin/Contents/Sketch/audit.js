@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _delegate_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_delegate_js__WEBPACK_IMPORTED_MODULE_0__);
 /* TODO
 - More info about symbols (# overrides vs # layers) and styles (color, line weight, opacity)
-- Fix zoom appending!
+- Remember previously selected library
 */
 
 
@@ -122,10 +122,15 @@ var libraryData = [];
 var fileData = '';
 function runAudit(context) {
   if (libraries.length == 0) {
-    showError();
+    showError("Sorry, no libraries were found.");
   } else {
     libraryData = getLibraryData();
-    showDialog();
+
+    if (libraryData.length == 0) {
+      showError("Sorry, no valid libraries were found.");
+    } else {
+      showDialog();
+    }
   }
 }
 
@@ -133,30 +138,34 @@ function getLibraryData() {
   var data = [];
 
   for (var i = 0; i < libraries.length; i++) {
-    var document = libraries[i].getDocument();
-    data[i] = {
-      symbol: document.getSymbols(),
-      layerStyle: document.getSharedLayerStyles(),
-      textStyle: document.getSharedTextStyles()
-    };
+    if (libraries[i].valid) {
+      var document = libraries[i].getDocument();
+      var obj = {
+        name: libraries[i].name,
+        symbol: document.getSymbols(),
+        layerStyle: document.sharedLayerStyles,
+        textStyle: document.sharedTextStyles,
+        path: ''
+      };
 
-    if (libraries[i].libraryType != "Remote") {
-      data[i]['path'] = document.path;
-    } else {
-      data[i]['path'] = '';
+      if (libraries[i].libraryType != "Remote") {
+        obj['path'] = document.path;
+      }
+
+      data.push(obj);
     }
   }
 
   return data;
 }
 
-function showError() {
+function showError(message) {
   var iconPath = context.plugin.urlForResourceNamed("icon.png").path();
   var icon = NSImage.alloc().initByReferencingFile(iconPath);
   var alert = NSAlert.alloc().init();
   alert.setIcon(icon);
   alert.setMessageText("Library Audit");
-  alert.setInformativeText("No Libraries Found.");
+  alert.setInformativeText(message);
   alert.addButtonWithTitle("Ok");
 
   if (alert.runModal() == NSAlertFirstButtonReturn) {
@@ -213,8 +222,8 @@ function showDialog() {
 function getLibraryNames() {
   var libraryNames = [];
 
-  for (var i = 0; i < libraries.length; i++) {
-    libraryNames.push(libraries[i].name);
+  for (var i = 0; i < libraryData.length; i++) {
+    libraryNames.push(libraryData[i].name);
   }
 
   return libraryNames;
@@ -227,7 +236,7 @@ function updateLabels() {
 }
 
 function createCSV() {
-  var columnNames = "Name,Instances,ID\n";
+  var columnNames = "Name,Instances,URI\n";
   var emptyRow = ",,\n";
   var symbolValues = [];
 
@@ -236,7 +245,7 @@ function createCSV() {
       var data = libraryData[currentSelection].symbol[i].name.replace(/,/g, '') + "," + libraryData[currentSelection].symbol[i].getAllInstances().length + ",";
 
       if (libraryData[currentSelection].path != '') {
-        data += "sketch://" + libraryData[currentSelection].path + "?centerOnLayer=" + libraryData[currentSelection].path + libraryData[currentSelection].symbol[i].id + "&zoom=1\n";
+        data += "sketch://" + libraryData[currentSelection].path + "?centerOnLayer=" + libraryData[currentSelection].symbol[i].id + "&zoom=1\n";
       }
 
       symbolValues.push(data);
@@ -284,7 +293,10 @@ function showSavePanel() {
   savePanel.setAllowsOtherFileTypes(false);
   savePanel.setExtensionHidden(false);
 
-  if (savePanel.runModal()) {
+  if (savePanel.runModal() != NSFileHandlingPanelOKButton) {
+    UI.message('📓 Export canceled.');
+    return;
+  } else {
     var filePath = savePanel.URL().path();
     var file = NSString.stringWithString(fileData);
     file.writeToFile_atomically_encoding_error(filePath, true, NSUTF8StringEncoding, null);
