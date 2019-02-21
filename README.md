@@ -1,5 +1,5 @@
-# sketch-library-audit
-Export Symbol and Shared Style data from any Sketch Library to CSV.
+# Sketch Library Audit
+Export Symbol and Shared Style data from any Sketch Library to CSV. 
 
 # Usage
 Command + Option + L = Run Library Audit
