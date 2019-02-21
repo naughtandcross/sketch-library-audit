@@ -6,11 +6,11 @@
 		<description>Export Symbol and Shared Style data from any Library to CSV.</description>
 		<language>en</language>
 		<item>
-			<title>Version 0.2.0</title>
+			<title>Version 0.1.4</title>
 			<description>
 				
 			</description>
-			<enclosure url="https://github.com/naughtandcross/sketch-library-audit/archive/master.zip" sparkle:version="0.2.0" />
+			<enclosure url="https://github.com/naughtandcross/sketch-library-audit/archive/master.zip" sparkle:version="0.1.4" />
 		</item>
 	</channel>
 </rss>
