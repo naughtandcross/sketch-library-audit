@@ -5,6 +5,5 @@ src/audit.js
 src/delegate.js
 src/manifest.json
 package.json
+package-lock.json
 assets/icon.png
-package.json
-package.json
