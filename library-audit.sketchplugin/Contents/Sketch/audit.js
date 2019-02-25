@@ -103,10 +103,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "runAudit", function() { return runAudit; });
 /* harmony import */ var _delegate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./delegate.js */ "./src/delegate.js");
 /* harmony import */ var _delegate_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_delegate_js__WEBPACK_IMPORTED_MODULE_0__);
-/* TODO
-- More info about symbols (# overrides vs # layers) and styles (color, line weight, opacity)
-- Remember previously selected library
-*/
 
 
 var sketch = __webpack_require__(/*! sketch/dom */ "sketch/dom");
