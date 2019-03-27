@@ -2,7 +2,7 @@
   "name": "library-audit",
   "version": "0.2.0",
   "engines": {
-    "sketch": ">=3.0"
+    "sketch": ">=52.0"
   },
   "skpm": {
     "name": "library-audit",
