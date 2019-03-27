@@ -10,6 +10,7 @@ Command + Option + L = Run Library Audit
 Runner and Sketch Packs once the directory updates.
 
 # Changelog
+* **v0.3.0** - Now skips over disabled libraries.
 * **v0.2.0** - Looks like a new version of `skpm publish` fixed my issue with publishing.
 * **v0.1.8** - After wrestling with `skpm publish` for a couple of nights, filed a PR manually to get this out.
 * **v0.1.3** - Improved error handling for instances where users have an invalid library loaded.
